@@ -7,120 +7,158 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="topbar">
-        <div class="container nav">
-            <div class="brand">Test Entreprise</div>
-            <nav>
-                <a href="#clients">Clients</a>
-                <a href="#ajout">Ajouter</a>
-            </nav>
-        </div>
-    </header>
-
-    <main class="container">
-        <section class="hero">
-            <div>
-                <p class="eyebrow">Base client</p>
-                <h1>Gestion de la clientèle</h1>
-                <p class="subtitle">Suivi des prospects et clients pour le démarchage de porte à porte.</p>
-            </div>
-            <div class="stats">
-                <div class="stat-card">
-                    <span class="label">Clients</span>
-                    <strong id="totalClients">0</strong>
+    <div id="loginScreen" class="auth-screen">
+        <div class="auth-card">
+            <p class="eyebrow auth-eyebrow">Accès sécurisé</p>
+            <h2>Connexion</h2>
+            <form id="loginForm">
+                <div class="field">
+                    <label for="username">Nom d'utilisateur</label>
+                    <input type="text" id="username" placeholder="Entrez votre nom d'utilisateur">
                 </div>
-                <div class="stat-card">
-                    <span class="label">Actifs</span>
-                    <strong id="activeStatus">0</strong>
+                <div class="field">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" placeholder="Entrez votre mot de passe">
                 </div>
-                <div class="stat-card">
-                    <span class="label">Âge moyen</span>
-                    <strong id="clientAge">0 ans</strong>
-                </div>
-            </div>
-        </section>
-
-        <section class="panel" id="ajout">
-            <h2>Ajouter / Modifier un client</h2>
-            <form id="clientForm">
-                <input type="hidden" id="clientId" name="clientId">
-                <div class="grid">
-                    <div class="field">
-                        <label for="firstName">Prénom</label>
-                        <input type="text" id="firstName" placeholder="Ex : Julien">
-                    </div>
-                    <div class="field">
-                        <label for="lastName">Nom</label>
-                        <input type="text" id="lastName" placeholder="Ex : Bernard">
-                    </div>
-                    <div class="field">
-                        <label for="age">Âge</label>
-                        <input type="number" id="age" min="0" placeholder="Ex : 32">
-                    </div>
-                    <div class="field">
-                        <label for="city">Ville</label>
-                        <input type="text" id="city" placeholder="Ex : Marseille">
-                    </div>
-                    <div class="field full">
-                        <label for="address">Adresse</label>
-                        <input type="text" id="address" placeholder="Ex : 14 rue de la République">
-                    </div>
-                    <div class="field">
-                        <label for="phone">Téléphone</label>
-                        <input type="tel" id="phone" placeholder="Ex : 06 12 34 56 78">
-                    </div>
-                    <div class="field">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" placeholder="Ex : nom@email.com">
-                    </div>
-                    <div class="field">
-                        <label for="status">Statut</label>
-                        <select id="status">
-                            <option value="À relancer">À relancer</option>
-                            <option value="Rdv fixé">Rdv fixé</option>
-                            <option value="Client">Client</option>
-                            <option value="Refusé">Refusé</option>
-                        </select>
-                    </div>
-                    <div class="field full">
-                        <label for="notes">Notes</label>
-                        <textarea id="notes" rows="3" placeholder="Informations complémentaires..."></textarea>
-                    </div>
-                </div>
-
-                <div class="form-actions">
-                    <button type="submit" id="submitBtn" class="btn primary">Ajouter le client</button>
-                    <button type="button" id="cancelEdit" class="btn secondary">Annuler</button>
-                    <button type="button" id="resetBtn" class="btn danger">Vider la base</button>
-                </div>
+                <button type="submit" class="btn primary full-width">Se connecter</button>
             </form>
-        </section>
+            <p id="loginError" class="error-message"></p>
+        </div>
+    </div>
 
-        <section class="panel" id="clients">
-            <div class="table-header">
-                <h2>Liste des clients</h2>
-                <input type="search" id="searchInput" placeholder="Rechercher...">
+    <div id="appScreen" class="app-screen hidden">
+        <header class="topbar">
+            <div class="container nav">
+                <div class="brand">Test Entreprise</div>
+                <div class="nav-right">
+                    <nav>
+                        <a href="#clients">Clients</a>
+                        <a href="#ajout">Ajouter</a>
+                        <a href="#dossier">Dossier</a>
+                    </nav>
+                    <button id="logoutBtn" class="btn logout-btn">Déconnexion</button>
+                </div>
             </div>
+        </header>
 
-            <div class="table-wrap">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nom</th>
-                            <th>Prénom</th>
-                            <th>Âge</th>
-                            <th>Adresse</th>
-                            <th>Ville</th>
-                            <th>Téléphone</th>
-                            <th>Statut</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="clientTableBody"></tbody>
-                </table>
-            </div>
-        </section>
-    </main>
+        <main class="container">
+            <section class="hero">
+                <div>
+                    <p class="eyebrow">Base client</p>
+                    <h1>Gestion de la clientèle</h1>
+                    <p class="subtitle">Suivi des prospects et clients pour le démarchage de porte à porte.</p>
+                </div>
+                <div class="stats">
+                    <div class="stat-card">
+                        <span class="label">Clients</span>
+                        <strong id="totalClients">0</strong>
+                    </div>
+                    <div class="stat-card">
+                        <span class="label">Actifs</span>
+                        <strong id="activeStatus">0</strong>
+                    </div>
+                    <div class="stat-card">
+                        <span class="label">Âge moyen</span>
+                        <strong id="clientAge">0 ans</strong>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel" id="ajout">
+                <h2>Ajouter / Modifier un client</h2>
+                <form id="clientForm">
+                    <input type="hidden" id="clientId" name="clientId">
+                    <div class="grid">
+                        <div class="field">
+                            <label for="firstName">Prénom</label>
+                            <input type="text" id="firstName" placeholder="Ex : Julien">
+                        </div>
+                        <div class="field">
+                            <label for="lastName">Nom</label>
+                            <input type="text" id="lastName" placeholder="Ex : Bernard">
+                        </div>
+                        <div class="field">
+                            <label for="age">Âge</label>
+                            <input type="number" id="age" min="0" placeholder="Ex : 32">
+                        </div>
+                        <div class="field">
+                            <label for="city">Ville</label>
+                            <input type="text" id="city" placeholder="Ex : Marseille">
+                        </div>
+                        <div class="field full">
+                            <label for="address">Adresse</label>
+                            <input type="text" id="address" placeholder="Ex : 14 rue de la République">
+                        </div>
+                        <div class="field">
+                            <label for="phone">Téléphone</label>
+                            <input type="tel" id="phone" placeholder="Ex : 06 12 34 56 78">
+                        </div>
+                        <div class="field">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" placeholder="Ex : nom@email.com">
+                        </div>
+                        <div class="field">
+                            <label for="status">Statut</label>
+                            <select id="status">
+                                <option value="À relancer">À relancer</option>
+                                <option value="Rdv fixé">Rdv fixé</option>
+                                <option value="Client">Client</option>
+                                <option value="Refusé">Refusé</option>
+                            </select>
+                        </div>
+                        <div class="field full">
+                            <label for="photo">Photo du client</label>
+                            <input type="file" id="photo" accept="image/*">
+                        </div>
+                        <div class="field full">
+                            <label for="notes">Notes</label>
+                            <textarea id="notes" rows="3" placeholder="Informations complémentaires..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" id="submitBtn" class="btn primary">Ajouter le client</button>
+                        <button type="button" id="cancelEdit" class="btn secondary">Annuler</button>
+                        <button type="button" id="resetBtn" class="btn danger">Vider la base</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="panel" id="clients">
+                <div class="table-header">
+                    <h2>Liste des clients</h2>
+                    <input type="search" id="searchInput" placeholder="Rechercher...">
+                </div>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Prénom</th>
+                                <th>Âge</th>
+                                <th>Adresse</th>
+                                <th>Ville</th>
+                                <th>Téléphone</th>
+                                <th>Statut</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="clientTableBody"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="panel dossier-panel" id="dossier">
+                <div class="table-header">
+                    <h2>Dossier client</h2>
+                </div>
+                <div id="clientDossier" class="client-dossier empty-state-box">
+                    <p>Sélectionnez un client pour ouvrir son dossier.</p>
+                </div>
+            </section>
+        </main>
+    </div>
 
     <script src="script.js"></script>
 </body>

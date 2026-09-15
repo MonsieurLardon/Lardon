@@ -38,9 +38,53 @@ body {
     color: var(--text);
 }
 
+.hidden {
+    display: none !important;
+}
+
 .container {
     width: min(1200px, 92%);
     margin: 0 auto;
+}
+
+.auth-screen {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, rgba(29,120,217,0.08), rgba(255,176,103,0.12));
+    padding: 32px;
+}
+
+.auth-card {
+    width: min(450px, 100%);
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(20,35,59,0.08);
+    border-radius: 28px;
+    padding: 32px;
+    box-shadow: var(--shadow);
+}
+
+.auth-card h2 {
+    margin: 0 0 18px;
+    font-size: 2rem;
+    color: var(--text);
+}
+
+.auth-eyebrow {
+    margin-bottom: 10px;
+}
+
+.error-message {
+    min-height: 22px;
+    margin: 14px 0 0;
+    color: var(--danger);
+    font-weight: 700;
+}
+
+.full-width {
+    width: 100%;
+    margin-top: 16px;
 }
 
 .topbar {
@@ -57,6 +101,13 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 18px 0;
+    gap: 16px;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 .brand {
@@ -80,6 +131,12 @@ nav a {
 
 nav a:hover {
     color: white;
+}
+
+.logout-btn {
+    background: rgba(255,255,255,0.12);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.18);
 }
 
 .hero {
@@ -305,6 +362,11 @@ tr:last-child td {
     cursor: pointer;
 }
 
+.dossier-btn {
+    background: #edf4ff;
+    color: var(--primary-deep);
+}
+
 .edit-btn {
     background: #edf5ff;
     color: var(--primary-deep);
@@ -349,12 +411,77 @@ tr:last-child td {
     color: var(--muted);
 }
 
+.dossier-panel {
+    padding-bottom: 34px;
+}
+
+.client-dossier {
+    background: linear-gradient(135deg, rgba(232,243,255,0.6), rgba(255,240,227,0.5));
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 22px;
+}
+
+.empty-state-box {
+    text-align: center;
+    color: var(--muted);
+    font-weight: 600;
+}
+
+.dossier-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.client-avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid rgba(29,120,217,0.2);
+    background: white;
+}
+
+.dossier-header h3 {
+    margin: 0 0 8px;
+    font-size: 1.7rem;
+}
+
+.dossier-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
+    gap: 16px;
+}
+
+.dossier-box {
+    background: rgba(255,255,255,0.8);
+    border: 1px solid rgba(20,35,59,0.06);
+    border-radius: 18px;
+    padding: 16px 18px;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+.label-dossier {
+    display: block;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
 @media (max-width: 760px) {
-    .hero, .grid {
+    .hero, .grid, .dossier-grid {
         grid-template-columns: 1fr;
     }
 
-    .nav, .table-header {
+    .nav, .nav-right, .table-header {
         flex-direction: column;
         align-items: flex-start;
     }
